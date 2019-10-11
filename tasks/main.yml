@@ -1,9 +1,32 @@
 ---
-- name: Install rancher-cli
-  shell: "curl -kL {{rancher_cli_download_url}} | tar zx --strip-components 2 -C /usr/local/bin"
-  args:
-    creates: /usr/local/bin/rancher
-  become: yes
+#- name: Install rancher-cli
+#  shell: "curl -kL {{rancher_cli_download_url}} | tar zx --strip-components 2 -C /usr/local/bin"
+#  args:
+#    creates: /usr/local/bin/rancher
+#  become: yes
+
+#- name: Download rancher-cli from url
+#  get_url:
+#    url: https://releases.rancher.com/cli2/v2.3.0/rancher-linux-amd64-v2.3.0.tar.gz
+#    dest: /tmp/rancher-linux-amd64-v2.3.0.tar.gz
+
+- name: Download and Extract Rancher cli
+  unarchive:
+    src: "{{ rancher_cli_download_url }}"
+    #    src: "https://releases.rancher.com/cli2/v2.3.0/rancher-linux-amd64-v2.3.0.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+
+- name: Synchronize the  "{{ rancher_cli_download_url.split('/')[-1].rstrip('.tar.gz') }}"  directory
+  synchronize:
+#    src: "/tmp/{{ rancher_cli_download_url.split('/')[-1].rstrip('.tar.gz')('/rancher') }}"
+    src: "/tmp/rancher-v2.3.0/rancher"
+    dest: "/usr/local/bin"
+
+- name: Remove the rancher temporary directory
+  file:
+    path: "/tmp/rancher-v2.3.0"
+    state: absent
 
 - name: Set permissions rancher
   file: path=/usr/local/bin/rancher mode=0755
