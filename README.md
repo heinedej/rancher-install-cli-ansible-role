@@ -1,4 +1,4 @@
-# rancher-install-cli-ansible-role
+# rancher_install_cli_ansible_role
 
 Ansible role to install rancher cli. Forked from AdopteUnOps/rancher-install-cli-ansible-role, as there seem to be very little change.
 
