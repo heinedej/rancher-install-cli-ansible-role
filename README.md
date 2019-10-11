@@ -6,7 +6,7 @@ Role Variables
 --------------
 
 ```
-rancher_cli_download_url: https://github.com/rancher/cli/releases/download/v0.6.4/rancher-linux-amd64-v0.6.4.tar.gz
+rancher_cli_download_url: https://releases.rancher.com/cli2/v2.3.0/rancher-linux-amd64-v2.3.0.tar.gz
 
 License
 -------
